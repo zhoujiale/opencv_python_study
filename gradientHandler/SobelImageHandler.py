@@ -1,0 +1,21 @@
+import cv2 as cv
+import numpy as np
+
+src = cv.imread('../lena.jpg',cv.IMREAD_GRAYSCALE)
+sobelx = cv.Sobel(src,cv.CV_64F,1,0)
+sobely = cv.Sobel(src,cv.CV_64F,0,1)
+sobelxy = cv.Sobel(src,cv.CV_64F,1,1)
+sobelx1 = cv.convertScaleAbs(sobelx)
+sobely1 = cv.convertScaleAbs(sobely)
+sobelxy1 = cv.convertScaleAbs(sobelxy)
+sobelAnd = cv.addWeighted(sobelx1,0.5,sobely1,0.5,0)
+cv.imshow('src',src)
+cv.imshow('x',sobelx)
+cv.imshow('y',sobely)
+cv.imshow('x1',sobelx1)
+cv.imshow('y1',sobely1)
+cv.imshow('xy',sobelxy)
+cv.imshow('xy1',sobelxy1)
+cv.imshow('and',sobelAnd)
+cv.waitKey()
+cv.destroyAllWindows()
